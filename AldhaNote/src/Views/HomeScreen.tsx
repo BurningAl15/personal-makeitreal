@@ -69,11 +69,12 @@ const HomeScreen = ({navigation}) => {
     },[]);
 
     useEffect(()=>{
-        // getNotes();
+        getNotes();
         setIsLoading(false);
     },[trigger]);
 
 
+    // ! NOT SENDING NEW NOTES YET
     const addNote = async ({type,name,content}) => {
         try {
             const newNote = {

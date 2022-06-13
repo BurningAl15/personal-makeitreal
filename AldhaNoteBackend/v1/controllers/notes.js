@@ -2,9 +2,11 @@ const Notes = require('../models/Note');
 
 const getAllNotes = async (req, res) => {
     try {
-        // const { limit = 5, from = 0 } = req.query;
-        // const userId = req.user._id;
-        // const query = { user: userId };
+        const { limit = 5, from = 0 } = req.query;
+        const userId = req.user._id;
+        const query = { user: userId };
+
+        console.log(`Limit: ${limit}\nFrom: ${from}\nUserId: ${userId}\nQuery: ${query} `);
 
         // // const notes = await Notes.find({});
         // const [total, user] = await Promise.all([
@@ -13,10 +15,10 @@ const getAllNotes = async (req, res) => {
         // ]);
 
         // res.status(200)
-        // .json({
-        //     total,
-        //     user,
-        // });
+        //     .json({
+        //         total,
+        //         user,
+        //     });
         // res.json({ notes });
 
         const notes = await Notes.find({});

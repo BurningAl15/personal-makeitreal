@@ -1,8 +1,18 @@
 const bcryptjs = require("bcryptjs");
 const User = require('../models/User');
 const { generateJWT } = require("../helpers/generate-jwt");
+const { check } = require("express-validator");
+const { validateFields } = require("../middlewares/field-validator");
+const { isValidEmail } = require("../helpers/db-validators");
+
 
 const registerUser = async (req, res) => {
+
+    check("email", "Email field is required").isEmail();
+    check("email").custom(isValidEmail);
+    check("password", "Password field is required").not().isEmpty();
+    validateFields(req, res);
+
     try {
         const { firstName, lastName, email, password, confirmPassword } = req.body;
         const user = new User({ firstName, lastName, email, password, confirmPassword });
@@ -25,7 +35,12 @@ const registerUser = async (req, res) => {
 }
 
 const loginUser = async (req, res) => {
+    check("email", "Email field is required").isEmail();
+    check("password", "Password field is required").not().isEmpty();
+    validateFields(req, res);
+
     const { email, password } = req.body;
+
     try {
         const user = await User.findOne({ email });
 

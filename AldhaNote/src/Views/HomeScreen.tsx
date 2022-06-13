@@ -28,15 +28,17 @@ const HomeScreen = ({navigation}) => {
     const getNotes = async () => {
         try {
             setIsLoading(true);
-            const response = await axios.get(`${BASE_URL}/notes`);
-            // console.log('GET: ', response.data);
-            const newNotes = {...response.data}.notes.map((note:any) => ({
+            const jsonValue = await AsyncStorage.getItem('@user');
+            const { email } = jsonValue != null ? JSON.parse(jsonValue) : null;
+            const response = await axios.get(`${BASE_URL}/notes/${email}`);
+            // console.log('GET: ', response.data.data);
+            const newNotes = {...response.data.data}.notes.map((note:any) => ({
                 id: note._id,
                 type: note.type,
                 name: note.name,
                 content: note.content,
             }));
-            console.log('UPDATED: ', newNotes);
+            // console.log('UPDATED: ', newNotes);
             setNotes(newNotes);
         } catch (error) {
             console.log('>>> ',error);
@@ -46,6 +48,7 @@ const HomeScreen = ({navigation}) => {
     const getUserData = async () => {
         try {
             const jsonValue = await AsyncStorage.getItem('@user');
+            // console.log('USER DATA: ', jsonValue);
             setUserData(jsonValue != null ? JSON.parse(jsonValue) : null);
             setIsLoading(false);
         }
@@ -66,13 +69,15 @@ const HomeScreen = ({navigation}) => {
     },[]);
 
     useEffect(()=>{
-        getNotes();
+        // getNotes();
         setIsLoading(false);
     },[trigger]);
+
 
     const addNote = async ({type,name,content}) => {
         try {
             const newNote = {
+                user: userData,
                 type: type,
                 name: name,
                 content: content,

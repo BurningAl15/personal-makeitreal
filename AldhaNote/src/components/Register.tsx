@@ -7,6 +7,7 @@ import Button from './Button';
 import * as yup from 'yup';
 import axios from 'axios';
 import { BASE_URL } from '../config/config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Register = ({navigation}) => {
     const [passwordChecker, onChangePasswordChecker] = useState<boolean>(true);
@@ -68,8 +69,16 @@ const Register = ({navigation}) => {
     const onSubmit = async (values:any,{setSubmitting}) => {
         try {
             console.log(values);
-            const resp = await axios.post(`${BASE_URL}/user/register`, values);
-            console.log('RESP: ', resp.data);
+            const resp = await axios.post(`${BASE_URL}/register`, values);
+            console.log('RESP: ', Object.keys(resp.data.data));
+            console.log('RESP USER: ', resp.data.data.user);
+            await AsyncStorage.setItem('@token', resp.data.data.user.activationToken);
+
+            // Activate User
+            const token = await AsyncStorage.getItem('@token');
+            await axios.post(`${BASE_URL}/login/${token}`, values);
+
+            console.log('Async Storage: ', await AsyncStorage.getItem('@token'));
             setSubmitting(true);
         }
         catch (error){

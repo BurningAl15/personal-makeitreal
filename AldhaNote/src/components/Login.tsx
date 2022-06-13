@@ -32,11 +32,10 @@ const Login = ({navigation}) => {
   const onSubmit = async (values:any,{setSubmitting}) => {
     try {
       console.log(values);
-      const resp = await axios.post(`${BASE_URL}/user/login`, values);
-      await AsyncStorage.setItem('@token', resp.data.token);
-      const userValue = JSON.stringify(resp.data.user);
-      await AsyncStorage.setItem('@user', userValue);
-      // console.log('RESP: ', resp.data);
+      const resp = await axios.post(`${BASE_URL}/login`, values);
+      const user = JSON.stringify(resp.data.data.user);
+      console.log('USER: ', user);
+      await AsyncStorage.setItem('@user', user);
       // console.log('Async Storage: ', AsyncStorage.getItem('@token'));
       setSubmitting(true);
     }

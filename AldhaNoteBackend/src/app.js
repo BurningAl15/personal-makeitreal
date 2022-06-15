@@ -12,6 +12,7 @@ const { notFound404Middleware } = require('./shared/middlewares/notFound.middlew
 const userRoutes = require('./mvc/users/users.routes');
 const noteRoutes = require('./mvc/notes/notes.routes');
 // const shopRoutes = require('./shop/shop.routes');
+const noteTypeRoutes = require('./mvc/noteTypes/noteTypes.routes');
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(userRoutes);
 app.use(noteRoutes);
 // app.use(shopRoutes);
+app.use(noteTypeRoutes);
 
 app.use(notFound404Middleware);
 

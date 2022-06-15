@@ -22,7 +22,7 @@ const HomeScreen = ({navigation}) => {
     const [modalVisible, setModalVisible] = useState(false);
 
     const renderItem = ({ item }) => (
-        <Task name={item.name} />
+        <Task type={item.type} name={item.name} />
     );
 
     const getNotes = async () => {
@@ -73,8 +73,6 @@ const HomeScreen = ({navigation}) => {
         setIsLoading(false);
     },[trigger]);
 
-
-    // ! NOT SENDING NEW NOTES YET
     const addNote = async ({type,name,content}) => {
         try {
             const newNote = {

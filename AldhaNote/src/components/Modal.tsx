@@ -25,7 +25,8 @@ const CustomModal = ({modalVisible, setModalVisible, addNote}) => {
         try {
             setIsLoading(true);
             const response = await axios.get(`${BASE_URL}/noteTypes`);
-            const newTypes = {...response.data}.noteType.map((type:any) => ({
+            console.log('RESPONSE: ', response.data.data.noteTypes);
+            const newTypes = {...response.data.data}.noteTypes.map((type:any) => ({
                 id: type._id,
                 value: type.noteType,
                 label: type.noteType.charAt(0).toUpperCase() + type.noteType.slice(1),
@@ -112,7 +113,7 @@ const CustomModal = ({modalVisible, setModalVisible, addNote}) => {
                                             console.log('VALUES: ', values)
                                         }
                                         {
-                                            values.type === 'Note' &&
+                                            values.type === 'note' &&
                                             <>
                                                 <CustomInput
                                                     label="Title"
@@ -143,11 +144,11 @@ const CustomModal = ({modalVisible, setModalVisible, addNote}) => {
                                             </>
                                         }
                                         {
-                                            values.type === 'Image' &&
+                                            values.type === 'image' &&
                                             <Text>Image Picker</Text>
                                         }
                                         {
-                                            values.type === 'List' &&
+                                            values.type === 'list' &&
                                             <Text>List Picker</Text>
                                         }
                                         <Button

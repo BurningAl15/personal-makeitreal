@@ -2,29 +2,48 @@ import React from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Task = ({name}) => {
+const Task = ({type, name}) => {
+
+    const handlePress_Open = () => {
+      Alert.alert('ALERT');
+    };
+
+    const handlePress_Edit = () => {
+      Alert.alert('EDIT');
+    };
+
+    const showIcon = (iconType: string) => {
+      console.log('Icon Type: ', iconType);
+      switch (iconType){
+        case 'note':
+          return 'rocket';
+        default:
+          return 'pencil';
+      }
+    };
+
 
     return (
       <View style={styles.item}>
         <View style={styles.itemLeft}>
           {/* <View style={styles.square} /> */}
-          <Icon.Button 
-            style={styles.button} 
-            name="rocket" 
-            size={30} 
+          <Icon.Button
+            style={styles.button}
+            name={showIcon(type)}
+            size={30}
             color="#900"
-            onPress={() => Alert.alert('ALERT')}
+            onPress={() => handlePress_Open()}
           >
             <Text style={styles.itemText}>{name}</Text>
           </Icon.Button>
         </View>
-        <Icon.Button 
-          style={styles.button} 
-          name="rocket" 
-          size={30} 
+        <Icon.Button
+          style={styles.button}
+          name={showIcon('edit')}
+          size={30}
           color="#900"
-          onPress={() => Alert.alert('ALERT')}
-        />
+          onPress={() => handlePress_Edit()}
+          />
       </View>
     );
   };

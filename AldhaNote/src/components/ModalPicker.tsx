@@ -23,7 +23,7 @@ const ModalPicker = ({types, changeModalVisibility,setSelectedValue,isModalVisib
             <TouchableOpacity
                 key={index}
                 style={styles.option}
-                onPress={() => onPressItem(type.label)}
+                onPress={() => onPressItem(type.value)}
             >
                 <Text style={styles.text}>{type.label}</Text>
             </TouchableOpacity>

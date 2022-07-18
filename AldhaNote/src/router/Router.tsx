@@ -40,7 +40,8 @@ const Router = () => {
   const [initialView, setInitialView] = useState<string>('');
 
   let routes = [
-    {id: 1, name: loginRoute, component: LoginScreen, isInitialRoute: true},
+    {
+      id: 1, name: loginRoute, component: LoginScreen, isInitialRoute: true},
     // {
     //   id: 1,
     //   name: 'on Boarding',

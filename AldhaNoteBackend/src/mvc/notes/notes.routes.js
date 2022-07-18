@@ -7,7 +7,14 @@ const {
 } = require('../../shared/middlewares/validationResults.middleware');
 
 // Controllers
-const { postNote, getNotes } = require('./controllers');
+const {
+    patchNote,
+    postNote,
+    deleteNote,
+    getNotes,
+    getSpecificNotes,
+    getNote
+} = require('./controllers');
 
 const router = new Router();
 
@@ -16,15 +23,41 @@ router.post(
     body('user', 'User is required').notEmpty(),
     body('type', 'Type is required').notEmpty(),
     body('name', 'Name is required').notEmpty(),
-    body('content', 'Content is required').notEmpty(),
     validationResults,
     postNote,
+);
+
+router.patch(
+    `${API_BASE_URL}/notes`,
+    body('user', 'User is required').notEmpty(),
+    body('type', 'Type is required').notEmpty(),
+    body('name', 'Name is required').notEmpty(),
+    validationResults,
+    patchNote,
+);
+
+router.delete(
+    `${API_BASE_URL}/notes`,
+    validationResults,
+    deleteNote,
 );
 
 router.get(
     `${API_BASE_URL}/notes/:email`,
     validationResults,
     getNotes
+);
+
+router.get(
+    `${API_BASE_URL}/notes/:email/:type`,
+    validationResults,
+    getSpecificNotes
+);
+
+router.get(
+    `${API_BASE_URL}/note/:id`,
+    validationResults,
+    getNote
 );
 
 module.exports = router;

@@ -3,7 +3,7 @@ const { body } = require('express-validator');
 const bcrypt = require('bcryptjs');
 
 // Controllers
-const { postUser, postActivateUser, postLoginUser } = require('./controllers');
+const { postUser, postActivateUser, postLoginUser, patchUser } = require('./controllers');
 
 // Models
 const User = require('../../models/User.model');
@@ -35,6 +35,18 @@ router.post(
     body('password').notEmpty().withMessage('Password cannot be empty'),
     validationResults,
     postUser,
+);
+
+router.patch(
+    `${API_BASE_URL}/edit`,
+    body('email')
+        .notEmpty()
+        .withMessage('Email cannot be empty')
+        .bail()
+        .isEmail()
+        .withMessage('Email is not valid'),
+    validationResults,
+    patchUser,
 );
 
 router.post(`${API_BASE_URL}/login/:token`, postActivateUser);

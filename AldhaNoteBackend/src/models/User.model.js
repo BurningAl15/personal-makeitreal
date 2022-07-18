@@ -35,6 +35,10 @@ const userSchema = new Schema({
     password: { type: String, required: true, minlength: 6 },
     isActive: { type: Boolean, default: false },
     activationToken: String,
+    image: { type: String },
+    imageId: { type: String },
+    securityQuestion: { type: String },
+    securityAnswer: { type: String },
     notes: [{ type: Types.ObjectId, ref: 'Note', required: true }],
 });
 

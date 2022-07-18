@@ -13,10 +13,11 @@ const Task = ({type, name}) => {
     };
 
     const showIcon = (iconType: string) => {
-      console.log('Icon Type: ', iconType);
       switch (iconType){
         case 'note':
           return 'rocket';
+        case 'delete':
+          return 'delete';
         default:
           return 'pencil';
       }

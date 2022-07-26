@@ -3,7 +3,7 @@ const { body } = require('express-validator');
 const bcrypt = require('bcryptjs');
 
 // Controllers
-const { postUser, postActivateUser, postLoginUser, patchUser } = require('./controllers');
+const { postUser, postActivateUser, postLoginUser, patchUser, getUser } = require('./controllers');
 
 // Models
 const User = require('../../models/User.model');
@@ -80,5 +80,7 @@ router.post(`${API_BASE_URL}/login`,
     validationResults,
     postLoginUser);
 
+router.get(`${API_BASE_URL}/userData/:id`,
+    getUser);
 
 module.exports = router;

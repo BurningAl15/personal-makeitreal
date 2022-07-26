@@ -20,7 +20,7 @@ import {
   profileRoute,
   profileDetailsRoute,
   noteDetailsRoute,
-  notesRoute
+  notesRoute,
 } from '../utils/route.utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { Pressable } from 'react-native';

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -13,9 +13,11 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faSignOut, faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 import {useUserData} from '../hooks/useUserData';
 import {profileDetailsRoute} from '../utils/route.utils';
+import { useIsFocused } from "@react-navigation/native";
 
 const ProfileScreen = ({navigation}) => {
-  const {userData, getFullName, getEmail, getImageURL} = useUserData();
+  const {userData, getFullName, getEmail, getImageURL, updateUserData} = useUserData();
+  const isFocused = useIsFocused();
 
   const navigateToProfile = () => {
     navigation.navigate(profileDetailsRoute);
@@ -28,6 +30,12 @@ const ProfileScreen = ({navigation}) => {
     await AsyncStorage.removeItem('@token');
     navigation.navigate('Login');
   };
+
+  useEffect(()=>{
+    if (isFocused){
+      updateUserData();
+    }
+  },[isFocused]);
 
   return (
     <SafeAreaView style={styles.bg}>

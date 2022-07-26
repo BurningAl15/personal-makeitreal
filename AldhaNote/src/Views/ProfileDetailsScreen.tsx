@@ -23,7 +23,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Snackbar from '../components/Snackbar';
 
 const ProfileDetailsScreen = ({navigation}) => {
-  const {userData, getFullName, getEmail, getImageURL} = useUserData();
+  const {userData, getFullName, getEmail, getImageURL, updateUserData} = useUserData();
   const [image, setImage] = useState<any>(null);
   const [messages, setMessages] = useState<any>([]);
 
@@ -50,6 +50,7 @@ const ProfileDetailsScreen = ({navigation}) => {
       const user = JSON.stringify(resp.data.data.user);
       console.log('USER: ', user);
       await AsyncStorage.setItem('@user', user);
+      // await updateUserData();
 
       navigation.navigate('Notes');
     } catch (error) {

@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 
-import {Animated, StyleSheet, Text, View} from 'react-native';
+import {Animated, Text, View} from 'react-native';
+import {styles} from './styles';
 
 const Message = props => {
   const opacity = useRef(new Animated.Value(0)).current;
@@ -59,34 +60,5 @@ const Snackbar = ({messages, setMessages}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  snackbar: {
-    position: 'absolute',
-    top: 45,
-    left: 0,
-    right: 0,
-    zIndex: 10,
-  },
-  animated: {
-    margin: 10,
-    marginBottom: 5,
-    backgroundColor: 'white',
-    padding: 10,
-    borderRadius: 4,
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.15,
-    shadowRadius: 5,
-    elevation: 6,
-  },
-  backgroundStyle: {},
-  button: {
-    marginBottom: 16,
-  },
-});
 
 export default Snackbar;

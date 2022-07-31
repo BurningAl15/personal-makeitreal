@@ -2,26 +2,24 @@ import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   ActivityIndicator,
   Image,
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-import {faAngleLeft, faCircle} from '@fortawesome/free-solid-svg-icons';
-import Button from '../components/Button';
+import Button from '../../components/Button';
 import axios from 'axios';
-import {BASE_URL} from '../config/config';
-import CustomInput from '../components/CustomInput';
-import {useNotes} from '../hooks/useNotes';
-import {homeRoute} from '../utils/route.utils';
+import {BASE_URL} from '../../config/config';
+import CustomInput from '../../components/CustomInput';
+import {useNotes} from '../../hooks/useNotes';
+import {homeRoute} from '../../utils/route.utils';
 
 import {
   ImageLibraryOptions,
   launchCamera,
   launchImageLibrary,
 } from 'react-native-image-picker';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {noteStyles} from '../styles';
 
 const EditNoteScreen = ({route, navigation}) => {
   const {noteId} = route.params;
@@ -133,10 +131,10 @@ const EditNoteScreen = ({route, navigation}) => {
   };
 
   return (
-    <SafeAreaView style={styles.bg}>
-      <Text style={styles.titleEmail}>Edit {note.type}</Text>
-      <View style={styles.blankSpace} />
-      <ScrollView contentContainerStyle={styles.scrollView}>
+    <SafeAreaView style={noteStyles.bg}>
+      <Text style={noteStyles.titleEmail}>Edit {note.type}</Text>
+      <View style={noteStyles.blankSpace} />
+      <ScrollView contentContainerStyle={noteStyles.scrollView}>
         {isLoading && <ActivityIndicator size="large" />}
         {!isLoading && (
           <>
@@ -189,32 +187,32 @@ const EditNoteScreen = ({route, navigation}) => {
                   isScreen={true}
                 />
                 {
-                  <View style={styles.imageContainer}>
+                  <View style={noteStyles.imageContainer}>
                     <Text>Old Image</Text>
                     <Image
-                      style={styles.oldAvatar}
+                      style={noteStyles.oldAvatar}
                       source={{uri: note.image}}
                     />
                   </View>
                 }
-                <View style={styles.blankSpace} />
+                <View style={noteStyles.blankSpace} />
                 {image === null && (
-                  <View style={styles.imageContainer}>
+                  <View style={noteStyles.imageContainer}>
                     <Text>Pick an image</Text>
                   </View>
                 )}
                 {!!image && image !== null && (
-                  <View style={styles.imageContainer}>
+                  <View style={noteStyles.imageContainer}>
                     <Text>New image</Text>
                     <Image
-                      style={styles.oldAvatar}
+                      style={noteStyles.oldAvatar}
                       source={{uri: image.assets[0].uri}}
                     />
                     <Text>{image?.assets[0].fileName}</Text>
                   </View>
                 )}
-                <View style={styles.blank} />
-                <View style={styles.buttonContainer}>
+                <View style={noteStyles.blank} />
+                <View style={noteStyles.buttonContainer}>
                   <Button
                     title={'Upload'}
                     onPress={openGallery}
@@ -272,7 +270,7 @@ const EditNoteScreen = ({route, navigation}) => {
                     </>
                   ))}
 
-                <View style={styles.buttonContainer}>
+                <View style={noteStyles.buttonContainer}>
                   <Button
                     title="Add"
                     onPress={addNewElementToList}
@@ -302,126 +300,5 @@ const EditNoteScreen = ({route, navigation}) => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    display: 'flex',
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  blank: {
-    flex: 1,
-  },
-  blankSpace: {
-    marginBottom: 16,
-  },
-  screenPage: {
-    textAlign: 'center',
-    fontSize: 20,
-  },
-  view: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '100%',
-  },
-  fab: {
-    position: 'absolute',
-    margin: 16,
-    right: 0,
-    bottom: 0,
-  },
-  noteTile: {
-    backgroundColor: 'white',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    width: '90%',
-    borderRadius: 10,
-    padding: 16,
-    marginBottom: 16,
-    marginHorizontal: 16,
-  },
-  noteText: {
-    fontSize: 20,
-  },
-  icon: {
-    marginRight: 10,
-  },
-  titleName: {
-    marginRight: 16,
-    marginLeft: 16,
-    fontSize: 20,
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  titleEmail: {
-    marginRight: 16,
-    marginLeft: 16,
-    fontSize: 20,
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  item: {
-    backgroundColor: '#f9c2ff',
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  bg: {
-    flex: 1,
-    position: 'relative',
-    marginTop: 20,
-  },
-  scrollView: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  oldAvatar: {
-    width: 200,
-    height: 200,
-  },
-  avatar: {
-    width: 300,
-    height: 300,
-  },
-  avatarContainer: {
-    borderRadius: 100,
-    width: 150,
-    height: 150,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 2,
-    marginBottom: 20,
-  },
-  profile: {
-    display: 'flex',
-    marginBottom: 20,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  image: {
-    borderRadius: 10,
-    minWidth: 150,
-    minHeight: 150,
-  },
-  imageContainer: {
-    maxWidth: '80%',
-    marginHorizontal: 20,
-    borderRadius: 10,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: '#000',
-    borderWidth: 2,
-    padding: 10,
-  },
-});
 
 export default EditNoteScreen;

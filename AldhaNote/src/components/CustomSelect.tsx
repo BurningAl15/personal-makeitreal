@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Modal,
-  SafeAreaView,
-} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, Modal} from 'react-native';
 import ModalPicker from './ModalPicker';
 
 const CustomSelect = ({types, handleChange}) => {

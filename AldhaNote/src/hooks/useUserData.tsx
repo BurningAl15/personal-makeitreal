@@ -1,14 +1,14 @@
 import {useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { BASE_URL } from '../config/config';
+import {BASE_URL} from '../config/config';
 
 export const useUserData = () => {
   const [userData, setUserData] = useState<any>(null);
 
   const updateUserData = async () => {
     let userDataTemp = userData !== null && userData;
-    if (userData === null){
+    if (userData === null) {
       userDataTemp = await AsyncStorage.getItem('@user');
       userDataTemp = JSON.parse(userDataTemp);
     }
@@ -23,7 +23,7 @@ export const useUserData = () => {
       const jsonValue = await AsyncStorage.getItem('@user');
       setUserData(jsonValue != null ? JSON.parse(jsonValue) : null);
     } catch (e) {
-      console.error('GET USER DATA',e);
+      console.error('GET USER DATA', e);
     }
   };
 

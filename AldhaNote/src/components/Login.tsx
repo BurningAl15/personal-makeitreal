@@ -1,13 +1,16 @@
-import React, { useState} from 'react';
-import { StyleSheet, SafeAreaView, ScrollView, View, Text} from 'react-native';
-import { homeRoute, forgetPasswordRoute, registerRoute} from '../utils/route.utils';
-import { Formik } from 'formik';
+import React, {useState} from 'react';
+import {StyleSheet, SafeAreaView, ScrollView, View, Text} from 'react-native';
+import {
+  homeRoute,
+  forgetPasswordRoute,
+  registerRoute,
+} from '../utils/route.utils';
+import {Formik} from 'formik';
 import Input from './Input';
 import Button from './Button';
 import * as yup from 'yup';
 import axios from 'axios';
-// import { AuthContext } from '../context/AuthContext';
-import { BASE_URL } from '../config/config';
+import {BASE_URL} from '../config/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Snackbar from './Snackbar';
 
@@ -15,23 +18,20 @@ const Login = ({navigation}) => {
   const [passwordChecker, onChangePasswordChecker] = useState<boolean>(true);
   const [messages, setMessages] = useState<any>([]);
 
-  const initialValues = { email: '', password: '' };
+  const initialValues = {email: '', password: ''};
 
   const loginSchema = yup.object().shape({
-    email: yup
-        .string()
-        .email()
-        .required(),
+    email: yup.string().email().required(),
     password: yup
-        .string()
-        .required('Please enter your password')
-        .matches(
-          /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-          'Password must contain at least 8 characters, one uppercase, one number and one special case character'
-        ),
+      .string()
+      .required('Please enter your password')
+      .matches(
+        /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+        'Password must contain at least 8 characters, one uppercase, one number and one special case character',
+      ),
   });
 
-  const onSubmit = async (values:any,{setSubmitting}) => {
+  const onSubmit = async (values: any, {setSubmitting}) => {
     try {
       const resp = await axios.post(`${BASE_URL}/login`, values);
       const user = JSON.stringify(resp.data.data.user);
@@ -39,13 +39,11 @@ const Login = ({navigation}) => {
 
       setSubmitting(true);
       navigation.navigate(homeRoute);
-    }
-    catch (error){
-        const message = 'Your password or email is incorrect';
-        setMessages([...messages, message]);
-        console.error(error);
-    }
-    finally {
+    } catch (error) {
+      const message = 'Your password or email is incorrect';
+      setMessages([...messages, message]);
+      console.error(error);
+    } finally {
       // Sucessfully Logged In
     }
   };
@@ -56,9 +54,16 @@ const Login = ({navigation}) => {
       <Formik
         validationSchema={loginSchema}
         initialValues={initialValues}
-        onSubmit={onSubmit}
-      >
-        {({ handleChange, handleBlur, handleSubmit, isSubmitting, values, errors, touched}) => (
+        onSubmit={onSubmit}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+          values,
+          errors,
+          touched,
+        }) => (
           <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Login</Text>
             <View style={styles.button} />
@@ -87,7 +92,9 @@ const Login = ({navigation}) => {
                 leftIcon="lock"
                 rightIcon={passwordChecker ? 'eye' : 'eye-off'}
                 error={touched.password && errors.password}
-                onRightIconPress={()=>onChangePasswordChecker(!passwordChecker)}
+                onRightIconPress={() =>
+                  onChangePasswordChecker(!passwordChecker)
+                }
               />
               <Button
                 title="Login"
@@ -116,7 +123,7 @@ const styles = StyleSheet.create({
   container: {
     marginRight: 12,
     marginLeft: 12,
-    height:'100%',
+    height: '100%',
   },
   title: {
     textAlign: 'center',

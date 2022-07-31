@@ -20,13 +20,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Snackbar from '../components/Snackbar';
 
 const ProfileDetailsScreen = ({navigation}) => {
-  const {userData, getFullName, getEmail, getImageURL, updateUserData} = useUserData();
+  const {userData, getFullName, getEmail, getImageURL, updateUserData} =
+    useUserData();
   const [image, setImage] = useState<any>(null);
   const [messages, setMessages] = useState<any>([]);
 
   const options: ImageLibraryOptions = {
-    // maxHeight: 600,
-    // maxWidth: 600,
     selectionLimit: 1,
     mediaType: 'photo',
     includeBase64: true,
@@ -94,7 +93,6 @@ const ProfileDetailsScreen = ({navigation}) => {
                       uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/OOjs_UI_icon_userAvatar.svg/60px-OOjs_UI_icon_userAvatar.svg.png',
                     }
               }
-              // source={{uri: `https://cdn.icon-icons.com/icons2/2438/PNG/512/boy_avatar_icon_148455.png`}}
             />
           </View>
           {!!image && image !== null && (
@@ -144,7 +142,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   titleEmail: {
-    // fontWeight: 'bold',
     marginRight: 16,
     marginLeft: 16,
     fontSize: 25,
@@ -161,7 +158,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   scrollView: {
-    // width: windowWidth - 16,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -184,7 +180,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   profile: {
-    // flex:1,
     display: 'flex',
     marginBottom: 20,
     flexDirection: 'row',

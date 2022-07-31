@@ -39,7 +39,7 @@ const Router = () => {
       name: loginRoute,
       component: LoginScreen,
       isInitialRoute: true,
-      options:{
+      options: {
         // headerShown: false,
       },
     },
@@ -54,7 +54,7 @@ const Router = () => {
       name: homeRoute,
       component: BottomTabNavigator,
       isInitialRoute: false,
-      options:{
+      options: {
         headerShown: false,
       },
     },
@@ -63,7 +63,7 @@ const Router = () => {
       name: forgetPasswordRoute,
       component: ForgetPasswordScreen,
       isInitialRoute: false,
-      options:{
+      options: {
         // headerShown: false,
       },
     },
@@ -72,7 +72,7 @@ const Router = () => {
       name: registerRoute,
       component: RegisterScreen,
       isInitialRoute: false,
-      options:{
+      options: {
         // headerShown: false,
       },
     },
@@ -81,7 +81,7 @@ const Router = () => {
       name: profileDetailsRoute,
       component: ProfileDetailsScreen,
       isInitialRoute: false,
-      options:{
+      options: {
         // headerShown: false,
       },
     },
@@ -90,7 +90,7 @@ const Router = () => {
       name: noteDetailsRoute,
       component: NoteDetailsScreen,
       isInitialRoute: false,
-      options:{
+      options: {
         // headerShown: false,
       },
     },
@@ -99,7 +99,7 @@ const Router = () => {
       name: editNoteRoute,
       component: EditNoteScreen,
       isInitialRoute: false,
-      options:{
+      options: {
         // headerShown: false,
       },
     },
@@ -136,11 +136,11 @@ const Router = () => {
         <NavigationContainer>
           <Stack.Navigator initialRouteName={initialView}>
             <Stack.Group
-              //  screenOptions={({ navigation }) => ({
-              //   presentation: 'modal',
-              //   // headerLeft: () => <CancelButton onPress={navigation.goBack} />,
-              //   headerStyle: { backgroundColor: 'papayawhip' },
-              // })}
+            //  screenOptions={({ navigation }) => ({
+            //   presentation: 'modal',
+            //   // headerLeft: () => <CancelButton onPress={navigation.goBack} />,
+            //   headerStyle: { backgroundColor: 'papayawhip' },
+            // })}
             >
               <>
                 {routes.map(route => (

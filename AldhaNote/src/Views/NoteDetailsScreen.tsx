@@ -13,7 +13,6 @@ import {BASE_URL} from '../config/config';
 import {View} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 
-// const NoteDetailsScreen = ({navigation, id, noteData}) => {
 const NoteDetailsScreen = ({route, navigation}) => {
   const {id} = route.params;
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -111,7 +110,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   titleName: {
-    // fontWeight: 'bold',
     marginRight: 16,
     marginLeft: 16,
     fontSize: 20,
@@ -119,7 +117,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   titleEmail: {
-    // fontWeight: 'bold',
     marginRight: 16,
     marginLeft: 16,
     fontSize: 20,
@@ -138,7 +135,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   scrollView: {
-    // width: windowWidth - 16,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -159,7 +155,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   profile: {
-    // flex:1,
     display: 'flex',
     marginBottom: 20,
     flexDirection: 'row',

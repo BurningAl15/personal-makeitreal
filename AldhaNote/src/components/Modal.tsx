@@ -58,7 +58,7 @@ const CustomModal = ({modalVisible, setModalVisible, addNote}) => {
       }));
       setTypes(newTypes);
     } catch (error) {
-      console.log('>>> ', error);
+      console.error(error);
     }
     setIsLoading(false);
   };
@@ -87,22 +87,18 @@ const CustomModal = ({modalVisible, setModalVisible, addNote}) => {
         return item;
       }
     });
-    console.log('>>> ', listElement);
-    // {name: [name], value: value}
     setList(listElement);
   };
 
   const addNewElementToList = () => {
     const newList = [...list];
     newList.push({id: list.length, value: ''});
-    console.log('>>> LIST LENGTH', list.length);
     setList(newList);
   };
 
   const onSubmit = async () => {
     try {
       if (values.type === 'note') {
-        console.log(`>>> SUBMIT NOTE: ${values}`);
         addNote({...values});
       } else if (values.type === 'image') {
         const newValues = {
@@ -123,9 +119,9 @@ const CustomModal = ({modalVisible, setModalVisible, addNote}) => {
       }
       setModalVisible(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
-      console.log('FINALLY');
+      // Note Sucessfully Added
     }
   };
 

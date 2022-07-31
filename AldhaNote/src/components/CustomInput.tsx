@@ -19,7 +19,8 @@ const CustomInput = ({
   isScreen = false,
 }) => {
   return (
-    <View style={!isScreen?styles.view:{...styles.view,...styles.fullScreen}}>
+    <View
+      style={!isScreen ? styles.view : {...styles.view, ...styles.fullScreen}}>
       <TextInput
         label={label}
         placeholder={placeholder}
@@ -41,10 +42,7 @@ const CustomInput = ({
           )
         }
       />
-      {
-        // !!error &&
-        <Text style={styles.error}>{error}</Text>
-      }
+      {<Text style={styles.error}>{error}</Text>}
     </View>
   );
 };
@@ -53,7 +51,7 @@ const styles = StyleSheet.create({
   view: {
     position: 'relative',
   },
-  fullScreen:{
+  fullScreen: {
     width: '90%',
     margin: 'auto',
   },

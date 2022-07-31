@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import React from 'react';
+import {Button, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   fab: {
@@ -11,13 +11,7 @@ const styles = StyleSheet.create({
 });
 
 const Fab = ({icon, onPress}) => {
-  return (
-    <Button
-        style={styles.fab}
-        onPress={onPress}
-        title={icon}
-    />
-  );
+  return <Button style={styles.fab} onPress={onPress} title={icon} />;
 };
 
 export default Fab;

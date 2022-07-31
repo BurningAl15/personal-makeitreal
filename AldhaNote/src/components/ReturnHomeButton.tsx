@@ -2,7 +2,6 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import React from 'react';
 import {Pressable, StyleSheet, Text} from 'react-native';
 
-// const ReturnHomeButton = ({navigation, route, icon, buttonText}) => {
 const ReturnHomeButton = ({navigation, route, icon, buttonText}) => {
   return (
     <Pressable
@@ -19,8 +18,6 @@ const ReturnHomeButton = ({navigation, route, icon, buttonText}) => {
 
 const styles = StyleSheet.create({
   button: {
-    // flex:1,
-    // justifyContent:'flex-start',
     backgroundColor: '#fff',
     flexDirection: 'row',
     alignItems: 'center',
@@ -31,11 +28,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     borderRadius: 10,
   },
-  icon: {
-    // marginRight: 15,
-  },
+  icon: {},
   title: {
-    // fontWeight: 'bold',
     marginRight: 16,
     marginLeft: 16,
     fontSize: 16,

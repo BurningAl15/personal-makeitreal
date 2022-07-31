@@ -13,10 +13,11 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faSignOut, faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 import {useUserData} from '../hooks/useUserData';
 import {profileDetailsRoute} from '../utils/route.utils';
-import { useIsFocused } from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 
 const ProfileScreen = ({navigation}) => {
-  const {userData, getFullName, getEmail, getImageURL, updateUserData} = useUserData();
+  const {userData, getFullName, getEmail, getImageURL, updateUserData} =
+    useUserData();
   const isFocused = useIsFocused();
 
   const navigateToProfile = () => {
@@ -24,18 +25,16 @@ const ProfileScreen = ({navigation}) => {
   };
 
   const logout = async () => {
-    // await AsyncStorage.setItem('@user', 'null');
-    // await AsyncStorage.setItem('@token', 'null');
     await AsyncStorage.removeItem('@user');
     await AsyncStorage.removeItem('@token');
     navigation.navigate('Login');
   };
 
-  useEffect(()=>{
-    if (isFocused){
+  useEffect(() => {
+    if (isFocused) {
       updateUserData();
     }
-  },[isFocused]);
+  }, [isFocused]);
 
   return (
     <SafeAreaView style={styles.bg}>
@@ -99,7 +98,6 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   title: {
-    // fontWeight: 'bold',
     marginRight: 16,
     marginLeft: 16,
     fontSize: 16,
@@ -116,7 +114,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   scrollView: {
-    // width: windowWidth - 16,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -138,7 +135,6 @@ const styles = StyleSheet.create({
     padding: 2.5,
   },
   profile: {
-    // flex:1,
     display: 'flex',
     marginBottom: 20,
     flexDirection: 'row',
@@ -146,8 +142,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    // flex:1,
-    // justifyContent:'flex-start',
     backgroundColor: '#fff',
     flexDirection: 'row',
     alignItems: 'center',
@@ -158,9 +152,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     borderRadius: 10,
   },
-  icon: {
-    // marginRight: 15,
-  },
+  icon: {},
 });
 
 export default ProfileScreen;

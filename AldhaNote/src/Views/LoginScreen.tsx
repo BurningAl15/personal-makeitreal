@@ -1,19 +1,17 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Icon from '../components/Icon';
+import {StyleSheet, View} from 'react-native';
 import Login from '../components/Login';
 
 const HomeScreen = ({navigation}) => {
   const styles = StyleSheet.create({
-      view: {
-        flex:1,
-      },
+    view: {
+      flex: 1,
+    },
   });
 
   return (
     <View style={styles.view}>
-      {/* <Icon /> */}
-      <Login navigation={navigation}/>
+      <Login navigation={navigation} />
     </View>
   );
 };

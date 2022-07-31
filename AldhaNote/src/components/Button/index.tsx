@@ -1,6 +1,7 @@
 import React from 'react';
-import {Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import {ActivityIndicator} from 'react-native-paper';
+import {styles} from './styles';
 
 const Button = ({
   title,
@@ -30,33 +31,5 @@ const Button = ({
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    width: '90%',
-    height: 60,
-    marginVertical: 10,
-    alignItems: 'center',
-    backgroundColor: '#2e2e2e',
-    justifyContent: 'center',
-    borderRadius: 10,
-  },
-  buttonSeparated: {
-    width: '40%',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-  },
-  disabled: {
-    width: '90%',
-    height: 60,
-    marginVertical: 10,
-    alignItems: 'center',
-    backgroundColor: '#949494',
-    justifyContent: 'center',
-    borderRadius: 10,
-  },
-});
 
 export default Button;

@@ -1,18 +1,19 @@
 import React, {useState} from 'react';
-import {StyleSheet, SafeAreaView, ScrollView, View, Text} from 'react-native';
+import {SafeAreaView, ScrollView, View, Text} from 'react-native';
 import {
   homeRoute,
   forgetPasswordRoute,
   registerRoute,
-} from '../utils/route.utils';
+} from '../../utils/route.utils';
 import {Formik} from 'formik';
-import Input from './Input';
-import Button from './Button';
+import Input from '../Input';
+import Button from '../Button';
 import * as yup from 'yup';
 import axios from 'axios';
-import {BASE_URL} from '../config/config';
+import {BASE_URL} from '../../config/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Snackbar from './Snackbar';
+import Snackbar from '../Snackbar';
+import {styles} from './styles';
 
 const Login = ({navigation}) => {
   const [passwordChecker, onChangePasswordChecker] = useState<boolean>(true);
@@ -118,22 +119,5 @@ const Login = ({navigation}) => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginRight: 12,
-    marginLeft: 12,
-    height: '100%',
-  },
-  title: {
-    textAlign: 'center',
-    fontSize: 20,
-    marginTop: 20,
-  },
-  backgroundStyle: {},
-  button: {
-    marginBottom: 16,
-  },
-});
 
 export default Login;

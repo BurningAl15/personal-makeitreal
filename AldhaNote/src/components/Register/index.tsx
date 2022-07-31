@@ -1,25 +1,19 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  SafeAreaView,
-  ScrollView,
-  View,
-  Text,
-  Image,
-} from 'react-native';
-import {loginRoute} from '../utils/route.utils';
+import {SafeAreaView, ScrollView, View, Text, Image} from 'react-native';
+import {loginRoute} from '../../utils/route.utils';
 import {Formik} from 'formik';
-import Input from './Input';
-import Button from './Button';
+import Input from '../Input';
+import Button from '../Button';
 import * as yup from 'yup';
 import axios from 'axios';
-import {BASE_URL} from '../config/config';
+import {BASE_URL} from '../../config/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Snackbar from './Snackbar';
+import Snackbar from '../Snackbar';
 import {
   ImageLibraryOptions,
   launchImageLibrary,
 } from 'react-native-image-picker';
+import {styles} from './styles';
 
 const Register = ({navigation}) => {
   const [passwordChecker, onChangePasswordChecker] = useState<boolean>(true);
@@ -243,37 +237,5 @@ const Register = ({navigation}) => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginRight: 12,
-    marginLeft: 12,
-    height: '100%',
-  },
-  title: {
-    textAlign: 'center',
-    fontSize: 20,
-    marginTop: 20,
-  },
-  backgroundStyle: {},
-  button: {
-    marginBottom: 16,
-  },
-  image: {
-    borderRadius: 10,
-    minWidth: 150,
-    minHeight: 150,
-  },
-  imageContainer: {
-    borderRadius: 10,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: '#000',
-    borderWidth: 2,
-    padding: 10,
-  },
-});
 
 export default Register;

@@ -1,0 +1,85 @@
+import {StyleSheet} from 'react-native';
+
+export const styles = StyleSheet.create({
+  blank: {
+    flex: 1,
+  },
+  backgroundOff: {
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    zIndex: -1,
+    flex: 1,
+  },
+  backgroundOn: {
+    backgroundColor: '#00000099',
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    zIndex: 1,
+    flex: 1,
+  },
+  modalContentContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+  },
+  container: {
+    height: '100%',
+    width: '100%',
+    flex: 1,
+    padding: 10,
+  },
+  modalView: {
+    width: '95%',
+    height: '95%',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    position: 'absolute',
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    top: 0,
+  },
+  image: {
+    borderRadius: 10,
+    minWidth: 150,
+    minHeight: 150,
+  },
+  imageContainer: {
+    borderRadius: 10,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#000',
+    borderWidth: 2,
+    padding: 10,
+  },
+});

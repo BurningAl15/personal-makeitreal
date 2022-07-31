@@ -3,15 +3,18 @@ import {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import LoginScreen from '../Views/LoginScreen';
-import ForgetPasswordScreen from '../Views/ForgetPasswordScreen';
-import RegisterScreen from '../Views/RegisterScreen';
-import HomeScreen from '../Views/HomeScreen';
-import ProfileScreen from '../Views/ProfileScreen';
-import ProfileDetailsScreen from '../Views/ProfileDetailsScreen';
-import NoteDetailsScreen from '../Views/NoteDetailsScreen';
+// Login Screens
+import LoginScreen from '../Views/LoginScreens/LoginScreen';
+import ForgetPasswordScreen from '../Views/LoginScreens/ForgetPasswordScreen';
+import RegisterScreen from '../Views/LoginScreens/RegisterScreen';
+// Note Screens
+import HomeScreen from '../Views/NoteScreens/HomeScreen';
+import NoteDetailsScreen from '../Views/NoteScreens/NoteDetailsScreen';
+import EditNoteScreen from '../Views/NoteScreens/EditNoteScreen';
+// Profile Screens
+import ProfileScreen from '../Views/ProfileScreens/ProfileScreen';
+import ProfileDetailsScreen from '../Views/ProfileScreens/ProfileDetailsScreen';
 import OnBoardingScreen from '../Views/OnBoardingScreen';
-import EditNoteScreen from '../Views/EditNoteScreen';
 
 import {
   loginRoute,

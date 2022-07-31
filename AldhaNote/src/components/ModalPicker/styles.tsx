@@ -1,53 +1,8 @@
-import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Dimensions,
-  ScrollView,
-} from 'react-native';
-
+import {StyleSheet, Dimensions} from 'react-native';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
-const ModalPicker = ({
-  types,
-  changeModalVisibility,
-  setSelectedValue,
-  isModalVisible,
-}) => {
-  const onPressItem = option => {
-    setSelectedValue(option);
-    changeModalVisibility(false);
-  };
-
-  const options = types.map((type, index) => {
-    return (
-      <TouchableOpacity
-        key={index}
-        style={styles.option}
-        onPress={() => onPressItem(type.value)}>
-        <Text style={styles.text}>{type.label}</Text>
-      </TouchableOpacity>
-    );
-  });
-
-  return (
-    <View style={isModalVisible ? styles.backgroundOn : styles.backgroundOff}>
-      <TouchableOpacity
-        style={styles.container}
-        onPress={() => changeModalVisibility(false)}>
-        <View style={styles.modal}>
-          <Text style={styles.text}>Note Type</Text>
-          <ScrollView>{options}</ScrollView>
-        </View>
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   backgroundOff: {
     height: '100%',
     width: '100%',
@@ -100,5 +55,3 @@ const styles = StyleSheet.create({
     margin: 20,
   },
 });
-
-export default ModalPicker;

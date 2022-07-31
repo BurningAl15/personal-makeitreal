@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Modal} from 'react-native';
-import ModalPicker from './ModalPicker';
+import {Text, View, TouchableOpacity, Modal} from 'react-native';
+import ModalPicker from '../ModalPicker';
+import {styles} from './styles';
 
 const CustomSelect = ({types, handleChange}) => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
@@ -37,29 +38,5 @@ const CustomSelect = ({types, handleChange}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  text: {},
-  touchableOpacity: {
-    flex: 1,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 10,
-    marginTop: 2,
-    marginHorizontal: 4,
-    marginBottom: 30,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-  },
-  touchableContainer: {
-    height: 80,
-  },
-});
 
 export default CustomSelect;

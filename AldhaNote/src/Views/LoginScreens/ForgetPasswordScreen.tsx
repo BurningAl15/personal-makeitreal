@@ -1,12 +1,10 @@
 import React from 'react';
 import {View, Text} from 'react-native';
+import {loginStyles} from '../styles';
 
 const ForgetPasswordScreen = ({navigation}) => {
   return (
-    <View
-      style={{
-        flex: 1,
-      }}>
+    <View style={loginStyles.view}>
       <Text>ForgetPassword Screen</Text>
     </View>
   );

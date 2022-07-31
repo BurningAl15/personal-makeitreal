@@ -81,13 +81,16 @@ export const useNotes = () => {
     const editNote = async ({id, type,name,content,image,list}) => {
         try {
             const newNote = {
+                noteId: id,
                 user: userData,
                 type: type,
                 name: name,
                 content: content,
+                image: image,
+                list: list,
             };
             console.log('NEW NOTE: ', newNote);
-            const response = await axios.post(`${BASE_URL}/notes`, newNote);
+            const response = await axios.patch(`${BASE_URL}/notes`, newNote);
             setTrigger(!trigger);
         } catch (error) {
             console.log('>>> ',error);

@@ -10,15 +10,12 @@ import {
 import Button from '../components/Button';
 import {profileRoute} from '../utils/route.utils';
 import {useUserData} from '../hooks/useUserData';
-import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
-import ReturnHomeButton from '../components/ReturnHomeButton';
 import {BASE_URL} from '../config/config';
 import {
   ImageLibraryOptions,
   launchImageLibrary,
 } from 'react-native-image-picker';
 import axios, {AxiosError} from 'axios';
-// import {loginRoute} from '../utils/route.utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Snackbar from '../components/Snackbar';
 
@@ -117,12 +114,6 @@ const ProfileDetailsScreen = ({navigation}) => {
           {/* <Text style={styles.titleEmail}>{getUserNotesCount()}</Text> */}
           <Button title={'Update'} onPress={onSubmit} isLoading={false} />
         </ScrollView>
-        <ReturnHomeButton
-          navigation={navigation}
-          route={profileRoute}
-          icon={faAngleLeft}
-          buttonText={'Go To Home'}
-        />
       </SafeAreaView>
     </>
   );

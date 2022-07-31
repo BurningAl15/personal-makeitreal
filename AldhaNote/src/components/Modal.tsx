@@ -105,7 +105,6 @@ const CustomModal = ({modalVisible, setModalVisible, addNote}) => {
         console.log(`>>> SUBMIT NOTE: ${values}`);
         addNote({...values});
       } else if (values.type === 'image') {
-        console.log(`>>> SUBMIT IMAGE: ${JSON.stringify(image)}`);
         const newValues = {
           ...values,
           image: `data:image/jpeg;base64,${image.assets[0].base64}`,

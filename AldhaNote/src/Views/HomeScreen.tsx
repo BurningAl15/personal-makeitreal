@@ -1,13 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import {SafeAreaView, View, ActivityIndicator, ScrollView, RefreshControl, Text, StyleSheet, Pressable} from 'react-native';
-// import {FlatList, View, Text, StyleSheet, Alert, Modal, Pressable } from 'react-native';
-// import Task from '../components/Task';
-import {Button, FAB} from 'react-native-paper';
+import {FAB} from 'react-native-paper';
 import CustomModal from '../components/Modal';
 import { useNotes } from '../hooks/useNotes';
 import ListItem from '../components/ListItem';
-import { noteDetailsRoute } from '../utils/route.utils';
-// import CustomEditModal from '../components/EditModal';
+import { noteDetailsRoute, editNoteRoute } from '../utils/route.utils';
+import { useIsFocused } from '@react-navigation/native';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+    faPenToSquare,
+    faNoteSticky,
+    faImage,
+} from '@fortawesome/free-solid-svg-icons';
 
 const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
@@ -16,16 +20,21 @@ const wait = (timeout) => {
 const HomeScreen = ({navigation}) => {
     const {notes, isLoading, trigger, hasElements, getNotes, getSpecificNotes, addNote, deleteNote, editNote, setTrigger} = useNotes();
     const [createModalVisible, setCreateModalVisible] = useState(false);
-    const [editModalVisible, setEditModalVisible] = useState(false);
-    const [editId,setEditId] = useState<string>('');
     const [refreshing, setRefreshing] = React.useState(false);
     const [currentType, setCurrentType] = useState<string>('all');
+    const isFocused = useIsFocused();
 
     const onRefresh = React.useCallback(() => {
       setRefreshing(true);
       getNotes();
       wait(2000).then(() => setRefreshing(false));
     }, []);
+
+    useEffect(()=>{
+        if (isFocused){
+            getNotes();
+        }
+    },[isFocused]);
 
     useEffect(()=>{
         getNotes();
@@ -40,12 +49,10 @@ const HomeScreen = ({navigation}) => {
         }
     },[trigger]);
 
-    // useEffect(()=>{
-    // },[currentType]);
-
     const editNoteInfo = (id) => {
-        setEditModalVisible(true);
-        setEditId(id);
+        navigation.navigate(editNoteRoute, {
+            noteId: id,
+        });
     };
 
     return (
@@ -63,6 +70,7 @@ const HomeScreen = ({navigation}) => {
                                 setTrigger(!trigger);
                             }}
                         >
+                            <FontAwesomeIcon size={20} icon={faPenToSquare} color={'white'} />
                             <Text style={styles.option}>All</Text>
                         </Pressable>
                         <Pressable
@@ -72,6 +80,7 @@ const HomeScreen = ({navigation}) => {
                                 setTrigger(!trigger);
                             }}
                         >
+                            <FontAwesomeIcon size={20} icon={faNoteSticky} color={'white'}/>
                             <Text style={styles.option}>Note</Text>
                         </Pressable>
                         <Pressable
@@ -81,6 +90,7 @@ const HomeScreen = ({navigation}) => {
                                 setTrigger(!trigger);
                             }}
                         >
+                            <FontAwesomeIcon size={20} icon={faImage} color={'white'}/>
                             <Text style={styles.option}>Image</Text>
                         </Pressable>
                         <Pressable
@@ -90,6 +100,7 @@ const HomeScreen = ({navigation}) => {
                                 setTrigger(!trigger);
                             }}
                         >
+                            <FontAwesomeIcon size={20} icon={faPenToSquare} color={'white'}/>
                             <Text style={styles.option}>List</Text>
                         </Pressable>
                     </ScrollView>
@@ -133,16 +144,6 @@ const HomeScreen = ({navigation}) => {
                     setModalVisible={setCreateModalVisible}
                     addNote={addNote}
                 />
-                {/* {
-                    !isLoading &&
-                    <CustomEditModal
-                        modalVisible={editModalVisible}
-                        setModalVisible={setEditModalVisible}
-                        editId={editId}
-                        noteData={notes}
-                        editNote={editNote}
-                    />
-                } */}
             </ScrollView>
             <FAB
                 style={styles.fab}
@@ -185,10 +186,6 @@ const styles = StyleSheet.create({
         flex:1,
         position:'relative',
         marginTop:20,
-        // display:'flex',
-        // flexDirection:'column',
-        // alignItems:'center',
-        // maxHeight:700,
     },
     container:{
         alignItems: 'center',
@@ -196,28 +193,31 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         alignItems: 'center',
-        // flex: 1,
-        // height:'100%',
-        // justifyContent: 'flex-start',
     },
     scrollViewHorizontal: {
         alignItems: 'flex-start',
-        // flex: 1,
-        // height:'100%',
-        // justifyContent: 'flex-start',
     },
     option: {
-        fontSize: 20,
+        marginLeft: 5,
+        fontSize: 15,
         color: 'white',
         textAlign: 'center',
     },
     unselected: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
         backgroundColor: '#A6A6A6',
         margin: 5,
         padding: 10,
         borderRadius: 10,
     },
     selected: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
         backgroundColor: '#575757',
         margin: 5,
         padding: 10,

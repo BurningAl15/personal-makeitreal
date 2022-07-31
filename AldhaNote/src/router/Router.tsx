@@ -11,6 +11,7 @@ import ProfileScreen from '../Views/ProfileScreen';
 import ProfileDetailsScreen from '../Views/ProfileDetailsScreen';
 import NoteDetailsScreen from '../Views/NoteDetailsScreen';
 import OnBoardingScreen from '../Views/OnBoardingScreen';
+import EditNoteScreen from '../Views/EditNoteScreen';
 
 import {
   loginRoute,
@@ -21,19 +22,12 @@ import {
   profileDetailsRoute,
   noteDetailsRoute,
   notesRoute,
+  editNoteRoute,
 } from '../utils/route.utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import { Pressable } from 'react-native';
-// import { Text } from 'react-native-paper';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faTasks, faUserCircle} from '@fortawesome/free-solid-svg-icons';
-// import { useNotes } from '../hooks/useNotes';
-
-// import CustomDrawer from './Drawer';
-// import { createDrawerNavigator } from '@react-navigation/drawer';
-
 const Stack = createNativeStackNavigator();
-// const Drawer = createDrawerNavigator();
 
 const Router = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -41,7 +35,14 @@ const Router = () => {
 
   let routes = [
     {
-      id: 1, name: loginRoute, component: LoginScreen, isInitialRoute: true},
+      id: 1,
+      name: loginRoute,
+      component: LoginScreen,
+      isInitialRoute: true,
+      options:{
+        // headerShown: false,
+      },
+    },
     // {
     //   id: 1,
     //   name: 'on Boarding',
@@ -53,30 +54,54 @@ const Router = () => {
       name: homeRoute,
       component: BottomTabNavigator,
       isInitialRoute: false,
+      options:{
+        headerShown: false,
+      },
     },
     {
       id: 3,
       name: forgetPasswordRoute,
       component: ForgetPasswordScreen,
       isInitialRoute: false,
+      options:{
+        // headerShown: false,
+      },
     },
     {
       id: 4,
       name: registerRoute,
       component: RegisterScreen,
       isInitialRoute: false,
+      options:{
+        // headerShown: false,
+      },
     },
     {
       id: 5,
       name: profileDetailsRoute,
       component: ProfileDetailsScreen,
       isInitialRoute: false,
+      options:{
+        // headerShown: false,
+      },
     },
     {
       id: 6,
       name: noteDetailsRoute,
       component: NoteDetailsScreen,
       isInitialRoute: false,
+      options:{
+        // headerShown: false,
+      },
+    },
+    {
+      id: 7,
+      name: editNoteRoute,
+      component: EditNoteScreen,
+      isInitialRoute: false,
+      options:{
+        // headerShown: false,
+      },
     },
   ];
 
@@ -116,21 +141,25 @@ const Router = () => {
       {!isLoading && (
         <NavigationContainer>
           <Stack.Navigator initialRouteName={initialView}>
-            <>
-              {routes.map(route => (
-                <Stack.Screen
-                  key={route.id}
-                  name={route.name}
-                  component={route.component}
-                  options={{headerShown: false}}
-                />
-              ))}
-            </>
+            <Stack.Group
+              //  screenOptions={({ navigation }) => ({
+              //   presentation: 'modal',
+              //   // headerLeft: () => <CancelButton onPress={navigation.goBack} />,
+              //   headerStyle: { backgroundColor: 'papayawhip' },
+              // })}
+            >
+              <>
+                {routes.map(route => (
+                  <Stack.Screen
+                    key={route.id}
+                    name={route.name}
+                    component={route.component}
+                    options={{...route.options}}
+                  />
+                ))}
+              </>
+            </Stack.Group>
           </Stack.Navigator>
-          {/* <Drawer.Navigator initialRouteName={initialView}>
-                <Drawer.Screen name="Home" component={HomeScreen} />
-                <Drawer.Screen name="Login" component={LoginScreen} />
-            </Drawer.Navigator> */}
         </NavigationContainer>
       )}
     </>
@@ -156,7 +185,6 @@ function BottomTabNavigator() {
         component={HomeScreen}
         options={({navigation}: any) => ({
           title: 'Notes',
-          // tabBarBadge: is,
           tabBarIcon: ({color, size}) => (
             <FontAwesomeIcon icon={faTasks} color={color} size={size} />
           ),
@@ -183,7 +211,6 @@ function BottomTabNavigator() {
         component={ProfileScreen}
         options={{
           title: 'Profile',
-          // tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           tabBarIcon: ({color, size}) => (
             <FontAwesomeIcon icon={faUserCircle} color={color} size={size} />
           ),

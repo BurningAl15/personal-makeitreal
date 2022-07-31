@@ -7,10 +7,9 @@ import {
   ScrollView,
   StyleSheet,
 } from 'react-native';
-import {faAngleLeft, faCircle} from '@fortawesome/free-solid-svg-icons';
+import {faCircle} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import {BASE_URL} from '../config/config';
-import ReturnHomeButton from '../components/ReturnHomeButton';
 import {View} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 
@@ -69,12 +68,6 @@ const NoteDetailsScreen = ({route, navigation}) => {
           </>
         )}
       </ScrollView>
-      <ReturnHomeButton
-        navigation={navigation}
-        route={'Notes'}
-        icon={faAngleLeft}
-        buttonText={'Go To Home'}
-      />
     </SafeAreaView>
   );
 };

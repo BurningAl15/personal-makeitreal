@@ -13,7 +13,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faSignOut, faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 import {useUserData} from '../hooks/useUserData';
 import {profileDetailsRoute} from '../utils/route.utils';
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused } from '@react-navigation/native';
 
 const ProfileScreen = ({navigation}) => {
   const {userData, getFullName, getEmail, getImageURL, updateUserData} = useUserData();

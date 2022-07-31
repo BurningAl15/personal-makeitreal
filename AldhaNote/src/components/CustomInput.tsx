@@ -16,9 +16,10 @@ const CustomInput = ({
   isMultiline = false,
   numLines = 1,
   id = -1,
+  isScreen = false,
 }) => {
   return (
-    <View style={styles.view}>
+    <View style={!isScreen?styles.view:{...styles.view,...styles.fullScreen}}>
       <TextInput
         label={label}
         placeholder={placeholder}
@@ -51,6 +52,10 @@ const CustomInput = ({
 const styles = StyleSheet.create({
   view: {
     position: 'relative',
+  },
+  fullScreen:{
+    width: '90%',
+    margin: 'auto',
   },
   input: {
     marginBottom: 40,

@@ -6,4 +6,4 @@ export const profileRoute = 'Profile';
 export const profileDetailsRoute = 'Profile Details';
 export const noteDetailsRoute = 'Note Details';
 export const notesRoute = 'Notes';
-
+export const editNoteRoute = 'EditNote';

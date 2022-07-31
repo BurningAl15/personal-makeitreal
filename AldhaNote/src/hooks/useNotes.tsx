@@ -24,18 +24,16 @@ export const useNotes = () => {
             const jsonValue = await AsyncStorage.getItem('@user');
             const { email } = jsonValue != null ? JSON.parse(jsonValue) : null;
             const response = await axios.get(`${BASE_URL}/notes/${email}`);
-            // console.log('GET: ', response.data.data);
             const newNotes = {...response.data.data}.notes.map((note:any) => ({
                 id: note._id,
                 type: note.type,
                 name: note.name,
                 content: note.content,
             }));
-            // console.log('UPDATED: ', newNotes);
             setNotes(newNotes);
             setIsLoading(false);
         } catch (error) {
-            console.log('>>> ',error);
+            console.error('GET NOTES:',error);
         }
     };
 
@@ -45,18 +43,16 @@ export const useNotes = () => {
             const jsonValue = await AsyncStorage.getItem('@user');
             const { email } = jsonValue != null ? JSON.parse(jsonValue) : null;
             const response = await axios.get(`${BASE_URL}/notes/${email}/${type}`);
-            // console.log('GET: ', response.data.data);
             const newNotes = {...response.data.data}.notes.map((note:any) => ({
                 id: note._id,
                 type: note.type,
                 name: note.name,
                 content: note.content,
             }));
-            // console.log('UPDATED: ', newNotes);
             setNotes(newNotes);
             setIsLoading(false);
         } catch (error) {
-            console.log('>>> ',error);
+            console.error('SPECIFIC NOTE:',error);
         }
     };
 
@@ -70,11 +66,10 @@ export const useNotes = () => {
                 image: image,
                 list: list,
             };
-            console.log('NEW NOTE: ', newNote);
             const response = await axios.post(`${BASE_URL}/notes`, newNote);
             setTrigger(!trigger);
         } catch (error) {
-            console.log('>>> ',error);
+            console.error('ADD NOTE:',error);
         }
     };
 
@@ -89,27 +84,25 @@ export const useNotes = () => {
                 image: image,
                 list: list,
             };
-            console.log('NEW NOTE: ', newNote);
             const response = await axios.patch(`${BASE_URL}/notes`, newNote);
             setTrigger(!trigger);
         } catch (error) {
-            console.log('>>> ',error);
+            console.error('EDIT NOTE:',error);
         }
     };
 
     const deleteNote = async (noteId) => {
         try {
-            console.log("DELETE NOTE: ", noteId);
             const config = {
                 data:{
                     noteId,
+                    user:userData,
                 },
             };
             const response = await axios.delete(`${BASE_URL}/notes`, config);
-            console.log("RESPONSE: ", response.data);
             setTrigger(!trigger);
         } catch (error) {
-            console.log('>>> ',error);
+            console.error('DELETE NOTE:',error);
         }
     };
 

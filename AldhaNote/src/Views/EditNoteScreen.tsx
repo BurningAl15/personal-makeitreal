@@ -64,7 +64,7 @@ const EditNoteScreen = ({ route, navigation}) => {
             setList(newList);
         }
       } catch (error) {
-        console.log('>>> ', error);
+        console.error('GET NOTE:', error);
       }
       setIsLoading(false);
     };
@@ -124,9 +124,9 @@ const EditNoteScreen = ({ route, navigation}) => {
 
             navigation.navigate(homeRoute);
         } catch (error) {
-            console.log(error);
+            console.error('EDIT SUBMIT',error);
         } finally {
-            console.log('FINALLY');
+            // Complete successfully or with error
         }
     };
 

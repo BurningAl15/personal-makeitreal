@@ -7,7 +7,6 @@ const { cloudinary, UPLOAD_PRESET } = require('../../../config/cloudinary')
 const createNote = async ({ ...noteData }) => {
     const { user, type, name, content, image, list } = noteData;
 
-    console.log(">>> NOTE DATA: ", noteData);
     let cloudinaryImage = { url: '', public_id: '' };
     if (type === 'image') {
         cloudinaryImage = await cloudinary.uploader.upload(image, { upload_preset: UPLOAD_PRESET });
@@ -37,9 +36,7 @@ const createNote = async ({ ...noteData }) => {
 
     const session = await mongoose.startSession();
     await session.withTransaction(async () => {
-        console.log(list.length);
         for (let i = 0; i < list.length; i++) {
-            console.log(list[i]);
             await newNote.list.push(list[i]);
         }
         await newNote.save({ session });

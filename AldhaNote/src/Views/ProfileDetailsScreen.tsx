@@ -45,9 +45,7 @@ const ProfileDetailsScreen = ({navigation}) => {
       };
       const resp = await axios.patch(`${BASE_URL}/edit`, newValues);
       const user = JSON.stringify(resp.data.data.user);
-      console.log('USER: ', user);
       await AsyncStorage.setItem('@user', user);
-      // await updateUserData();
 
       navigation.navigate('Notes');
     } catch (error) {
@@ -63,8 +61,6 @@ const ProfileDetailsScreen = ({navigation}) => {
             message = 'Is empty';
             break;
         }
-        console.log(err.response.status);
-        console.log(err.response.data);
         setMessages([...messages, message]);
       }
 
@@ -73,9 +69,9 @@ const ProfileDetailsScreen = ({navigation}) => {
         setMessages([...messages, message]);
       }
 
-      console.log(error);
+      console.error(error);
     } finally {
-      console.log('FINALLY');
+      // Complete the request
     }
   };
 

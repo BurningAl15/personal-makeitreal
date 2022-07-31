@@ -81,29 +81,25 @@ const Register = ({navigation}) => {
 
   const onSubmit = async (values: any, {setSubmitting}) => {
     try {
-      console.log(values);
       const newValues = {
         ...values,
         image: `data:image/jpeg;base64,${image.assets[0].base64}`,
       };
       const resp = await axios.post(`${BASE_URL}/register`, newValues);
-      console.log('RESP: ', Object.keys(resp.data.data));
-      console.log('RESP USER: ', resp.data.data.user);
       await AsyncStorage.setItem('@token', resp.data.data.user.activationToken);
 
       // Activate User
       const token = await AsyncStorage.getItem('@token');
       await axios.post(`${BASE_URL}/login/${token}`, values);
 
-      console.log('Async Storage: ', await AsyncStorage.getItem('@token'));
       setSubmitting(true);
       navigation.navigate(loginRoute);
     } catch (error) {
       const message = 'Your info is already registered';
       setMessages([...messages, message]);
-      console.log(error);
+      console.error(error);
     } finally {
-      console.log('FINALLY');
+      // Registry successful
     }
   };
 

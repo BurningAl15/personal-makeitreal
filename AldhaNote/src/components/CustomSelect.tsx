@@ -18,7 +18,6 @@ const CustomSelect = ({types, handleChange}) => {
   };
 
   const handleSelect = (option: String) => {
-    console.log('SELECTED: ', option);
     setSelectedValue(option);
     handleChange('type', option);
   };

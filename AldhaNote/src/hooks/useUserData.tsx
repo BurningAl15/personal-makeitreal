@@ -12,7 +12,6 @@ export const useUserData = () => {
       userDataTemp = await AsyncStorage.getItem('@user');
       userDataTemp = JSON.parse(userDataTemp);
     }
-    // console.log("USER DATA TEMP", userDataTemp);
     const resp = await axios.get(`${BASE_URL}/userData/${userDataTemp._id}`);
     const user = JSON.stringify(resp.data.data.user);
     await AsyncStorage.setItem('@user', user);
@@ -22,10 +21,9 @@ export const useUserData = () => {
   const getUserData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem('@user');
-      // console.log('ASYNC STORAGE: ', jsonValue);
       setUserData(jsonValue != null ? JSON.parse(jsonValue) : null);
     } catch (e) {
-      console.log(e);
+      console.error('GET USER DATA',e);
     }
   };
 

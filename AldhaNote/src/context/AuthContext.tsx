@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }):JSX.Element => {
             let userInfo = res.data;
             console.log(userInfo);
         }).catch(e=>{
-            console.log(e);
+            console.error('AUTH CONTEXT:',e);
         });
     };
 

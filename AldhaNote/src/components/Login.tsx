@@ -33,10 +33,8 @@ const Login = ({navigation}) => {
 
   const onSubmit = async (values:any,{setSubmitting}) => {
     try {
-      console.log(values);
       const resp = await axios.post(`${BASE_URL}/login`, values);
       const user = JSON.stringify(resp.data.data.user);
-      console.log('USER: ', user);
       await AsyncStorage.setItem('@user', user);
 
       setSubmitting(true);
@@ -45,10 +43,10 @@ const Login = ({navigation}) => {
     catch (error){
         const message = 'Your password or email is incorrect';
         setMessages([...messages, message]);
-        console.log(error);
+        console.error(error);
     }
     finally {
-      console.log('FINALLY');
+      // Sucessfully Logged In
     }
   };
 

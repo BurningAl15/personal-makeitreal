@@ -111,24 +111,18 @@ const Router = () => {
 
       const jsonValue = await AsyncStorage.getItem('@user');
       const token = await AsyncStorage.getItem('@token');
-      // console.log('>>> Storage: ', JSON.stringify(jsonValue));
-      // console.log(`>>> Token: ${JSON.stringify(token)}`);
 
       if (jsonValue === null) {
-        // console.log('2> Routes Order: ', routes);
         setInitialView(routes[0].name);
       } else if (jsonValue !== null) {
-        // else if (token !== null){
-        // && jsonValue !== undefined
         routes[0].isInitialRoute = false;
         routes[1].isInitialRoute = true;
-        // console.log('1> Routes Order: ', routes);
         setInitialView(routes[1].name);
       }
 
       setIsLoading(false);
     } catch (err) {
-      console.log('ERROR: ', err);
+      console.error('LOGIN ROUTE ORDER: ', err);
     }
   };
 
@@ -169,8 +163,6 @@ const Router = () => {
 const BottomTab = createBottomTabNavigator();
 
 function BottomTabNavigator() {
-  // const {isLoading getNoteNumbers} = useNotes();
-
   return (
     <BottomTab.Navigator
       initialRouteName={notesRoute}

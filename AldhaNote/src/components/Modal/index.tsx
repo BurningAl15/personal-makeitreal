@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Modal, Image, SafeAreaView, ScrollView} from 'react-native';
 import {FAB} from 'react-native-paper';
+import Fab from '../Fab';
 import Button from '../Button';
 import axios from 'axios';
 import {BASE_URL} from '../../config/config';
@@ -12,6 +13,7 @@ import {
   launchImageLibrary,
 } from 'react-native-image-picker';
 import {styles} from './styles';
+import {faXmark} from '@fortawesome/free-solid-svg-icons';
 
 interface NoteType {
   noteType: string;
@@ -131,11 +133,11 @@ const CustomModal = ({modalVisible, setModalVisible, addNote}) => {
             }}>
             <View style={styles.modalContentContainer}>
               <View style={styles.modalView}>
-                <FAB
-                  style={styles.fab}
-                  small
-                  icon="close"
+                <Fab
+                  icon={faXmark}
                   onPress={() => setModalVisible(false)}
+                  isBottom={false}
+                  iconColor={'white'}
                 />
                 <Text style={styles.modalText}>Add a note</Text>
                 <ScrollView style={styles.container}>

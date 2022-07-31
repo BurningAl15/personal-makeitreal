@@ -19,8 +19,10 @@ import {
   faPenToSquare,
   faNoteSticky,
   faImage,
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import {noteStyles} from '../styles';
+import Fab from '../../components/Fab';
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
@@ -166,12 +168,7 @@ const HomeScreen = ({navigation}) => {
           addNote={addNote}
         />
       </ScrollView>
-      <FAB
-        style={noteStyles.fab}
-        small
-        icon="plus"
-        onPress={() => setCreateModalVisible(true)}
-      />
+      <Fab icon={faPlus} onPress={() => setCreateModalVisible(true)} />
     </SafeAreaView>
   );
 };

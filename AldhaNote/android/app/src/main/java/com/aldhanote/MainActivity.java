@@ -47,4 +47,9 @@ public class MainActivity extends ReactActivity {
       return reactRootView;
     }
   }
+
+  // @Override
+  // protected void onCreate(Bundle savedInstanceState) {
+  // super.onCreate(null);
+  // }
 }

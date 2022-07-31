@@ -1,135 +1,157 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList, View, Text, StyleSheet, Alert, Modal, Pressable } from 'react-native';
+import {SafeAreaView, View, ActivityIndicator, ScrollView, RefreshControl, Text, StyleSheet, Pressable} from 'react-native';
 import {FAB} from 'react-native-paper';
-import Task from '../components/Task';
-import { BASE_URL } from '../config/config';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomModal from '../components/Modal';
+import { useNotes } from '../hooks/useNotes';
+import ListItem from '../components/ListItem';
+import { noteDetailsRoute, editNoteRoute } from '../utils/route.utils';
+import { useIsFocused } from '@react-navigation/native';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+    faPenToSquare,
+    faNoteSticky,
+    faImage,
+} from '@fortawesome/free-solid-svg-icons';
 
-interface NoteType {
-    id: string;
-    type: string;
-    name: string;
-    content: string;
-}
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+};
 
 const HomeScreen = ({navigation}) => {
-    const [notes, setNotes] = useState<NoteType[]>([]);
-    const [trigger, setTrigger] = useState<boolean>(false);
-    const [userData, setUserData] = useState<any>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [modalVisible, setModalVisible] = useState(false);
+    const {notes, isLoading, trigger, hasElements, getNotes, getSpecificNotes, addNote, deleteNote, editNote, setTrigger} = useNotes();
+    const [createModalVisible, setCreateModalVisible] = useState(false);
+    const [refreshing, setRefreshing] = React.useState(false);
+    const [currentType, setCurrentType] = useState<string>('all');
+    const isFocused = useIsFocused();
 
-    const renderItem = ({ item }) => (
-        <Task name={item.name} />
-    );
+    const onRefresh = React.useCallback(() => {
+      setRefreshing(true);
+      getNotes();
+      wait(2000).then(() => setRefreshing(false));
+    }, []);
 
-    const getNotes = async () => {
-        try {
-            setIsLoading(true);
-            const response = await axios.get(`${BASE_URL}/notes`);
-            // console.log('GET: ', response.data);
-            const newNotes = {...response.data}.notes.map((note:any) => ({
-                id: note._id,
-                type: note.type,
-                name: note.name,
-                content: note.content,
-            }));
-            console.log('UPDATED: ', newNotes);
-            setNotes(newNotes);
-        } catch (error) {
-            console.log('>>> ',error);
+    useEffect(()=>{
+        if (isFocused){
+            getNotes();
         }
-    };
-
-    const getUserData = async () => {
-        try {
-            const jsonValue = await AsyncStorage.getItem('@user');
-            setUserData(jsonValue != null ? JSON.parse(jsonValue) : null);
-            setIsLoading(false);
-        }
-        catch (e) {
-            console.log(e);
-        }
-    };
-
-    const logout = async () => {
-        await AsyncStorage.setItem('@user', 'null');
-        await AsyncStorage.setItem('@token', 'null');
-        navigation.navigate('Login');
-    };
+    },[isFocused]);
 
     useEffect(()=>{
         getNotes();
-        getUserData();
     },[]);
 
     useEffect(()=>{
-        getNotes();
-        setIsLoading(false);
+        if (currentType === 'all'){
+            getNotes();
+        }
+        else {
+            getSpecificNotes(currentType);
+        }
     },[trigger]);
 
-    const addNote = async ({type,name,content}) => {
-        try {
-            const newNote = {
-                type: type,
-                name: name,
-                content: content,
-            };
-            console.log('NEW NOTE: ', newNote);
-            const response = await axios.post(`${BASE_URL}/notes`, newNote);
-            setTrigger(!trigger);
-        } catch (error) {
-            console.log('>>> ',error);
-        }
+    const editNoteInfo = (id) => {
+        navigation.navigate(editNoteRoute, {
+            noteId: id,
+        });
     };
-
-    const getFullName = () => {
-        return userData?.firstName + ' ' + userData?.lastName;
-    };
-
-    const getEmail = () => {
-        return userData?.email;
-    };
-
-    const hasElements:boolean = notes.length > 0;
 
     return (
-        <View style={styles.bg}>
-            <Text style={styles.title}>Home Screen</Text>
-            <Text style={styles.title}>{getFullName() + '\n' + getEmail()}</Text>
+        <SafeAreaView style={styles.bg}>
             {
-                !isLoading &&
-                hasElements &&
-                <FlatList
-                    data={notes}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.id}
+                <View style={styles.container}>
+                    <ScrollView
+                        horizontal={true}
+                        contentContainerStyle={styles.scrollViewHorizontal}
+                    >
+                        <Pressable
+                            style={ currentType === 'all' ? styles.selected : styles.unselected }
+                            onPress={()=>{
+                                setCurrentType('all');
+                                setTrigger(!trigger);
+                            }}
+                        >
+                            <FontAwesomeIcon size={20} icon={faPenToSquare} color={'white'} />
+                            <Text style={styles.option}>All</Text>
+                        </Pressable>
+                        <Pressable
+                            style={ currentType === 'note' ? styles.selected : styles.unselected }
+                            onPress={()=>{
+                                setCurrentType('note');
+                                setTrigger(!trigger);
+                            }}
+                        >
+                            <FontAwesomeIcon size={20} icon={faNoteSticky} color={'white'}/>
+                            <Text style={styles.option}>Note</Text>
+                        </Pressable>
+                        <Pressable
+                            style={ currentType === 'image' ? styles.selected : styles.unselected }
+                            onPress={()=>{
+                                setCurrentType('image');
+                                setTrigger(!trigger);
+                            }}
+                        >
+                            <FontAwesomeIcon size={20} icon={faImage} color={'white'}/>
+                            <Text style={styles.option}>Image</Text>
+                        </Pressable>
+                        <Pressable
+                            style={ currentType === 'list' ? styles.selected : styles.unselected }
+                            onPress={()=>{
+                                setCurrentType('list');
+                                setTrigger(!trigger);
+                            }}
+                        >
+                            <FontAwesomeIcon size={20} icon={faPenToSquare} color={'white'}/>
+                            <Text style={styles.option}>List</Text>
+                        </Pressable>
+                    </ScrollView>
+                </View>
+            }
+            {
+                isLoading && <ActivityIndicator size="large"/>
+            }
+            <ScrollView
+             contentContainerStyle={styles.scrollView}
+             refreshControl={
+               <RefreshControl
+                 refreshing={refreshing}
+                 onRefresh={onRefresh}
+               />
+             }>
+                {
+                    !isLoading &&
+                    hasElements &&
+                    notes.map((item)=>(
+                        <ListItem
+                            key={item.id}
+                            icon = {item.type}
+                            title = {item.name}
+                            subTitle = {item.type}
+                            onPress_Open = {()=>navigation.navigate(noteDetailsRoute,{id:item.id})}
+                            // onPress_Open = {()=>navigation.navigate(noteDetailsRoute)}
+                            onPress_Edit = {()=>editNoteInfo(item.id)}
+                            onPress_Delete = {()=>deleteNote(item.id)}
+                        />
+                    ))
+                }
+                {
+                    !isLoading &&
+                    !hasElements &&
+                        <Text style={styles.title}>No notes yet :C</Text>
+                }
+
+                <CustomModal
+                    modalVisible={createModalVisible}
+                    setModalVisible={setCreateModalVisible}
+                    addNote={addNote}
                 />
-            }
-            {
-                !isLoading &&
-                !hasElements &&
-                    <Text style={styles.title}>No notes yet :C</Text>
-            }
-            <FAB
-                small
-                icon="plus"
-                onPress={() => logout()}
-            />
+            </ScrollView>
             <FAB
                 style={styles.fab}
                 small
                 icon="plus"
-                onPress={() => setModalVisible(true)}
+                onPress={() => setCreateModalVisible(true)}
             />
-            <CustomModal
-                modalVisible={modalVisible}
-                setModalVisible={setModalVisible}
-                addNote={addNote}
-            />
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -163,6 +185,43 @@ const styles = StyleSheet.create({
     bg:{
         flex:1,
         position:'relative',
+        marginTop:20,
+    },
+    container:{
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+    scrollView: {
+        alignItems: 'center',
+    },
+    scrollViewHorizontal: {
+        alignItems: 'flex-start',
+    },
+    option: {
+        marginLeft: 5,
+        fontSize: 15,
+        color: 'white',
+        textAlign: 'center',
+    },
+    unselected: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        backgroundColor: '#A6A6A6',
+        margin: 5,
+        padding: 10,
+        borderRadius: 10,
+    },
+    selected: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        backgroundColor: '#575757',
+        margin: 5,
+        padding: 10,
+        borderRadius: 10,
     },
 });
 

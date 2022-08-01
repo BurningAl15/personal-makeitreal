@@ -14,7 +14,7 @@ import EditNoteScreen from '../Views/NoteScreens/EditNoteScreen';
 // Profile Screens
 import ProfileScreen from '../Views/ProfileScreens/ProfileScreen';
 import ProfileDetailsScreen from '../Views/ProfileScreens/ProfileDetailsScreen';
-import OnBoardingScreen from '../Views/OnBoardingScreen';
+import OnBoardingScreen from '../Views/OnBoardingScreen/OnBoardingScreen';
 
 import {
   loginRoute,
@@ -26,6 +26,7 @@ import {
   noteDetailsRoute,
   notesRoute,
   editNoteRoute,
+  onBoardingRoute,
 } from '../utils/route.utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -46,14 +47,17 @@ const Router = () => {
         headerShown: false,
       },
     },
-    // {
-    //   id: 1,
-    //   name: 'on Boarding',
-    //   component: OnBoardingScreen,
-    //   isInitialRoute: true,
-    // },
     {
       id: 2,
+      name: onBoardingRoute,
+      component: OnBoardingScreen,
+      isInitialRoute: true,
+      options: {
+        headerShown: false,
+      },
+    },
+    {
+      id: 3,
       name: homeRoute,
       component: BottomTabNavigator,
       isInitialRoute: false,
@@ -62,7 +66,7 @@ const Router = () => {
       },
     },
     {
-      id: 3,
+      id: 4,
       name: forgetPasswordRoute,
       component: ForgetPasswordScreen,
       isInitialRoute: false,
@@ -71,7 +75,7 @@ const Router = () => {
       },
     },
     {
-      id: 4,
+      id: 5,
       name: registerRoute,
       component: RegisterScreen,
       isInitialRoute: false,
@@ -80,7 +84,7 @@ const Router = () => {
       },
     },
     {
-      id: 5,
+      id: 6,
       name: profileDetailsRoute,
       component: ProfileDetailsScreen,
       isInitialRoute: false,
@@ -89,7 +93,7 @@ const Router = () => {
       },
     },
     {
-      id: 6,
+      id: 7,
       name: noteDetailsRoute,
       component: NoteDetailsScreen,
       isInitialRoute: false,
@@ -98,7 +102,7 @@ const Router = () => {
       },
     },
     {
-      id: 7,
+      id: 8,
       name: editNoteRoute,
       component: EditNoteScreen,
       isInitialRoute: false,
@@ -114,13 +118,22 @@ const Router = () => {
 
       const jsonValue = await AsyncStorage.getItem('@user');
       const token = await AsyncStorage.getItem('@token');
+      const onBoardingToken = await AsyncStorage.getItem('@onBoarding');
+
+      console.log('>>> ON BOARDING ROUTE', onBoardingToken);
 
       if (jsonValue === null) {
         setInitialView(routes[0].name);
       } else if (jsonValue !== null) {
         routes[0].isInitialRoute = false;
-        routes[1].isInitialRoute = true;
-        setInitialView(routes[1].name);
+        if (onBoardingToken === null) {
+          routes[1].isInitialRoute = true;
+          setInitialView(routes[1].name);
+        } else {
+          routes[1].isInitialRoute = false;
+          routes[2].isInitialRoute = true;
+          setInitialView(routes[2].name);
+        }
       }
 
       setIsLoading(false);

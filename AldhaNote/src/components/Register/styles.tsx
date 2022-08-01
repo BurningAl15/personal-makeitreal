@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     marginTop: 20,
   },
   backgroundStyle: {},
-  button: {
+  blank: {
     marginBottom: 16,
   },
   image: {
@@ -29,5 +29,11 @@ export const styles = StyleSheet.create({
     borderColor: '#000',
     borderWidth: 2,
     padding: 10,
+  },
+  buttonContainer: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

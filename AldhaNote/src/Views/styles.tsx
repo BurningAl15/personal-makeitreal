@@ -1,4 +1,6 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
+export const COLORS = {primary: '#282534', white: '#fff'};
+export const {width, height} = Dimensions.get('window');
 
 export const loginStyles = StyleSheet.create({
   view: {
@@ -278,5 +280,84 @@ export const noteStyles = StyleSheet.create({
     borderColor: '#000',
     borderWidth: 2,
     padding: 10,
+  },
+});
+
+export const onBoardingStyles = StyleSheet.create({
+  subtitle: {
+    color: COLORS.white,
+    fontSize: 13,
+    marginTop: 10,
+    maxWidth: '70%',
+    textAlign: 'center',
+    lineHeight: 23,
+  },
+  title: {
+    color: COLORS.white,
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: 20,
+    textAlign: 'center',
+  },
+  image: {
+    height: '100%',
+    width: '100%',
+    resizeMode: 'contain',
+  },
+  indicator: {
+    height: 2.5,
+    width: 10,
+    backgroundColor: 'grey',
+    marginHorizontal: 3,
+    borderRadius: 2,
+  },
+  indicatorActive: {
+    backgroundColor: COLORS.white,
+    width: 25,
+  },
+  btn: {
+    flex: 1,
+    height: 50,
+    borderRadius: 5,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  safeArea: {
+    flex: 1,
+    backgroundColor: COLORS.primary,
+    width: '100%',
+  },
+  slideContainer: {
+    alignItems: 'center',
+    width: width,
+    marginTop: 10,
+    justifyContent: 'center',
+  },
+  slideImage: {height: '50%', width, resizeMode: 'contain'},
+  footerContainer: {
+    height: height * 0.25,
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+  },
+  footerIndicatorContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 20,
+  },
+  footerRenderContainer: {marginBottom: 20},
+  nextBtnTxt: {
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
+  skipBtn: {
+    borderColor: COLORS.white,
+    borderWidth: 1,
+    backgroundColor: 'transparent',
+  },
+  skipBtnTxt: {
+    fontWeight: 'bold',
+    fontSize: 15,
+    color: COLORS.white,
   },
 });

@@ -4,6 +4,7 @@ import {
   homeRoute,
   forgetPasswordRoute,
   registerRoute,
+  onBoardingRoute,
 } from '../../utils/route.utils';
 import {Formik} from 'formik';
 import Input from '../Input';
@@ -39,7 +40,11 @@ const Login = ({navigation}) => {
       await AsyncStorage.setItem('@user', user);
 
       setSubmitting(true);
-      navigation.navigate(homeRoute);
+      const onBoardingToken = await AsyncStorage.getItem('@onBoarding');
+
+      navigation.navigate(
+        onBoardingToken === null ? onBoardingRoute : homeRoute,
+      );
     } catch (error) {
       const message = 'Your password or email is incorrect';
       setMessages([...messages, message]);
@@ -97,21 +102,23 @@ const Login = ({navigation}) => {
                   onChangePasswordChecker(!passwordChecker)
                 }
               />
-              <Button
-                title="Login"
-                onPress={handleSubmit}
-                isLoading={isSubmitting}
-              />
-              <Button
-                title="Register"
-                onPress={() => navigation.navigate(registerRoute)}
-                isLoading={false}
-              />
-              <Button
-                title="Forget password"
-                onPress={() => navigation.navigate(forgetPasswordRoute)}
-                isLoading={false}
-              />
+              <View style={styles.buttonContainer}>
+                <Button
+                  title="Login"
+                  onPress={handleSubmit}
+                  isLoading={isSubmitting}
+                />
+                <Button
+                  title="Register"
+                  onPress={() => navigation.navigate(registerRoute)}
+                  isLoading={false}
+                />
+                <Button
+                  title="Forget password"
+                  onPress={() => navigation.navigate(forgetPasswordRoute)}
+                  isLoading={false}
+                />
+              </View>
             </ScrollView>
           </SafeAreaView>
         )}

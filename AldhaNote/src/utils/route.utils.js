@@ -7,3 +7,4 @@ export const profileDetailsRoute = 'Profile Details';
 export const noteDetailsRoute = 'Note Details';
 export const notesRoute = 'Notes';
 export const editNoteRoute = 'EditNote';
+export const onBoardingRoute = 'OnBoarding';

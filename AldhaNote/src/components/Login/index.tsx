@@ -34,7 +34,6 @@ const Login = ({navigation}) => {
 
   const onSubmit = async (values: any, {setSubmitting}) => {
     try {
-      console.log('>>>> LOGIN', values);
       const resp = await axios.post(`${BASE_URL}/login`, values);
       const user = JSON.stringify(resp.data.data.user);
       await AsyncStorage.setItem('@user', user);

@@ -25,7 +25,7 @@ const NoteDetailsScreen = ({route, navigation}) => {
       const newNote = {...response.data.data}.notes;
       setNote(newNote);
     } catch (error) {
-      console.log('>>> ', error);
+      console.log('NOTE DETAILS:', error);
     }
     setIsLoading(false);
   };

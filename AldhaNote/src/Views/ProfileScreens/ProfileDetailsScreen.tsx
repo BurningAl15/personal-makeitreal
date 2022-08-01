@@ -63,7 +63,6 @@ const ProfileDetailsScreen = ({navigation}) => {
   const getUserData = async () => {
     try {
       setIsLoading(true);
-      console.log('>>> USERDATA', userData);
       if (userData !== null) {
         setCurrentUserData({...userData, password: ''});
         // await wait(1000);
@@ -76,7 +75,6 @@ const ProfileDetailsScreen = ({navigation}) => {
 
   const onChange = (name, content) => {
     const newUserData = {...currentUserData, [name]: content};
-    console.log('>>> newUserData', newUserData);
     setCurrentUserData(newUserData);
   };
 
@@ -256,9 +254,6 @@ const ProfileDetailsScreen = ({navigation}) => {
                 onPress={openGallery}
                 isLoading={false}
               />
-              {/* <Text style={profileStyles.titleName}>{getFullName()}</Text>
-              <Text style={profileStyles.titleEmail}>{getEmail()}</Text> */}
-              {/* <Text style={profileStyles.titleEmail}>{getUserNotesCount()}</Text> */}
               <Button
                 title={'Update'}
                 onPress={onSubmit}

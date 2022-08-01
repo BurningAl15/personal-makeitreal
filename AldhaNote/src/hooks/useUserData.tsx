@@ -22,7 +22,6 @@ export const useUserData = () => {
     try {
       const jsonValue = await AsyncStorage.getItem('@user');
       setUserData(jsonValue != null ? JSON.parse(jsonValue) : null);
-      console.log('>>> GET USER');
     } catch (e) {
       console.error('GET USER DATA', e);
     }

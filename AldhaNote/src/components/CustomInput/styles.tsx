@@ -19,4 +19,12 @@ export const styles = StyleSheet.create({
     fontSize: 10,
     marginLeft: 10,
   },
+  message: {
+    position: 'absolute',
+    color: 'black',
+    bottom: 10,
+    textAlign: 'center',
+    fontSize: 10,
+    marginLeft: 10,
+  },
 });

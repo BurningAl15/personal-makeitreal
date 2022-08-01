@@ -18,6 +18,7 @@ const CustomInput = ({
   numLines = 1,
   id = -1,
   isScreen = false,
+  hasMessage = '',
 }) => {
   return (
     <View
@@ -44,6 +45,7 @@ const CustomInput = ({
         }
       />
       {<Text style={styles.error}>{error}</Text>}
+      {hasMessage !== '' && <Text style={styles.message}>{hasMessage}</Text>}
     </View>
   );
 };

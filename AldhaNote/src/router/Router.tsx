@@ -120,8 +120,6 @@ const Router = () => {
       const token = await AsyncStorage.getItem('@token');
       const onBoardingToken = await AsyncStorage.getItem('@onBoarding');
 
-      console.log('>>> ON BOARDING ROUTE', onBoardingToken);
-
       if (jsonValue === null) {
         setInitialView(routes[0].name);
       } else if (jsonValue !== null) {

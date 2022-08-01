@@ -27,6 +27,7 @@ const ProfileScreen = ({navigation}) => {
   const logout = async () => {
     await AsyncStorage.removeItem('@user');
     await AsyncStorage.removeItem('@token');
+    await AsyncStorage.removeItem('@onBoarding');
     navigation.navigate('Login');
   };
 

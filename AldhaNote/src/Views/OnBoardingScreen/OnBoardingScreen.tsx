@@ -23,15 +23,15 @@ const slides = [
   },
   {
     id: '2',
-    image: require('../../images/onboarding/onboard1.png'),
+    image: require('../../images/onboarding/onboard2.png'),
     title: 'Achieve Your Goals',
-    subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    subtitle: 'Create different notes as images, text and lists',
   },
   {
     id: '3',
-    image: require('../../images/onboarding/onboard1.png'),
+    image: require('../../images/onboarding/onboard3.png'),
     title: 'Increase Your Value',
-    subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    subtitle: 'List your notes by filtering them by category',
   },
 ];
 

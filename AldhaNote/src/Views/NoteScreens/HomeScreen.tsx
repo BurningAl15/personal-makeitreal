@@ -8,7 +8,6 @@ import {
   Text,
   Pressable,
 } from 'react-native';
-import {FAB} from 'react-native-paper';
 import CustomModal from '../../components/Modal';
 import {useNotes} from '../../hooks/useNotes';
 import ListItem from '../../components/ListItem';

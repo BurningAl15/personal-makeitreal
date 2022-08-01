@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Modal, Image, SafeAreaView, ScrollView} from 'react-native';
-import {FAB} from 'react-native-paper';
 import Fab from '../Fab';
 import Button from '../Button';
 import axios from 'axios';

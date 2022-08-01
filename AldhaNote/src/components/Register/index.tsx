@@ -115,7 +115,7 @@ const Register = ({navigation}) => {
         }) => (
           <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Register</Text>
-            <View style={styles.button} />
+            <View style={styles.blank} />
             <ScrollView>
               <Input
                 label="First Name"
@@ -190,11 +190,15 @@ const Register = ({navigation}) => {
                   <Text>{image?.assets[0].fileName}</Text>
                 </View>
               )}
-              <Button
-                title={'Upload'}
-                onPress={openGallery}
-                isLoading={false}
-              />
+              <View style={styles.buttonContainer}>
+                <Button
+                  title={'Upload'}
+                  onPress={openGallery}
+                  isLoading={false}
+                />
+              </View>
+              <View style={styles.blank} />
+
               <Input
                 label="Write a security question"
                 placeholder="What is your favorite color?"
@@ -219,17 +223,19 @@ const Register = ({navigation}) => {
                 error={touched.securityAnswer && errors.securityAnswer}
                 onRightIconPress={null}
               />
-              <Button
-                title="Register"
-                onPress={handleSubmit}
-                isLoading={isSubmitting}
-              />
-              <View style={styles.button} />
-              <Button
-                title="Login"
-                onPress={() => navigation.navigate(loginRoute)}
-                isLoading={false}
-              />
+              <View style={styles.buttonContainer}>
+                <Button
+                  title="Register"
+                  onPress={handleSubmit}
+                  isLoading={isSubmitting}
+                />
+                <View style={styles.blank} />
+                <Button
+                  title="Login"
+                  onPress={() => navigation.navigate(loginRoute)}
+                  isLoading={false}
+                />
+              </View>
             </ScrollView>
           </SafeAreaView>
         )}

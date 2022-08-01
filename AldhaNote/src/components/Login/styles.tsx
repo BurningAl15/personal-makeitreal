@@ -15,4 +15,10 @@ export const styles = StyleSheet.create({
   button: {
     marginBottom: 16,
   },
+  buttonContainer: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

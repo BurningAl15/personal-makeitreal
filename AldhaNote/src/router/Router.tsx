@@ -43,7 +43,7 @@ const Router = () => {
       component: LoginScreen,
       isInitialRoute: true,
       options: {
-        // headerShown: false,
+        headerShown: false,
       },
     },
     // {
@@ -67,7 +67,7 @@ const Router = () => {
       component: ForgetPasswordScreen,
       isInitialRoute: false,
       options: {
-        // headerShown: false,
+        headerShown: false,
       },
     },
     {
@@ -76,7 +76,7 @@ const Router = () => {
       component: RegisterScreen,
       isInitialRoute: false,
       options: {
-        // headerShown: false,
+        headerShown: false,
       },
     },
     {

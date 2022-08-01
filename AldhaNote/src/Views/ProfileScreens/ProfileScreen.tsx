@@ -63,7 +63,7 @@ const ProfileScreen = ({navigation}) => {
         </Pressable>
 
         <Pressable
-          onPress={() => console.warn('DO ANYTHING')}
+          onPress={() => navigateToProfile()}
           style={({pressed}) => ({
             opacity: pressed ? 0.5 : 1,
             ...profileStyles.button,

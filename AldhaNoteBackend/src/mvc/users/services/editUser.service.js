@@ -11,18 +11,24 @@ const editUser = async ({ ...userData }) => {
 
     const foundUser = await UserModel.findOne({ email: email });
     let cloudinaryImage = await cloudinary.uploader.upload(image, { upload_preset: UPLOAD_PRESET });
+
+    let hashedPassword = '';
+    if (password !== null) {
+        hashedPassword = await hashPassword(password);
+    }
+
     const tempUser = {
         _id: foundUser._id,
         firstName: firstName !== foundUser.firstName ? firstName : foundUser.firstName,
         lastName: lastName !== foundUser.lastName ? lastName : foundUser.lastName,
         email: email !== foundUser.email ? email : foundUser.email,
-        password: foundUser.password,
+        password: hashedPassword !== '' ? hashedPassword : foundUser.password,
         isActive: foundUser.isActive,
         activationToken: foundUser.activationToken,
         image: cloudinaryImage.url,
         imageId: cloudinaryImage.public_id,
-        securityQuestion: foundUser.securityQuestion,
-        securityAnswer: foundUser.securityAnswer,
+        securityQuestion: securityQuestion,
+        securityAnswer: securityAnswer,
     };
     const modifiedUser = await UserModel.findByIdAndUpdate(tempUser._id, tempUser, { new: true });
 

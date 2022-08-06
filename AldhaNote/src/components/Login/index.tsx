@@ -113,11 +113,11 @@ const Login = ({navigation}) => {
                   onPress={() => navigation.navigate(registerRoute)}
                   isLoading={false}
                 />
-                <Button
+                {/* <Button
                   title="Forget password"
                   onPress={() => navigation.navigate(forgetPasswordRoute)}
                   isLoading={false}
-                />
+                /> */}
               </View>
             </ScrollView>
           </SafeAreaView>

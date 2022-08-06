@@ -13,7 +13,7 @@ const editUser = async ({ ...userData }) => {
     let cloudinaryImage = await cloudinary.uploader.upload(image, { upload_preset: UPLOAD_PRESET });
 
     let hashedPassword = '';
-    if (password !== null) {
+    if (password !== null && password !== '') {
         hashedPassword = await hashPassword(password);
     }
 
